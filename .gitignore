@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Avalonia.FilmTvSerieSystem/appsettings.json
+
+appsettings.json
