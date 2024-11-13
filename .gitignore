@@ -364,3 +364,5 @@ FodyWeavers.xsd
 /Avalonia.FilmTvSerieSystem/appsettings.json
 
 appsettings.json
+
+Database.cs

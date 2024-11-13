@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Avalonia.FilmTvSerieSystem.ViewModels
+namespace Avalonia.FilmTvSerieSystem.Data
 {
-    public class WatchlistViewModel
+    public class DbContext
     {
-
+       
     }
 }
