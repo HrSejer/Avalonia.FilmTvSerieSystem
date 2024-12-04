@@ -20,4 +20,5 @@ namespace Avalonia.FilmTvSerieSystem.Models
         public ICollection<Rating> Ratings { get; set; }
         public ICollection<Recommendation> Recommendations { get; set; }
     }
+
 }

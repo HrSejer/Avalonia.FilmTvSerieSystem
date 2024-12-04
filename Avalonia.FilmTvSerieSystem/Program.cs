@@ -7,21 +7,18 @@ namespace Avalonia.FilmTvSerieSystem
 {
     internal sealed class Program
     {
-        // Initialization code. Don't use any Avalonia, third-party APIs, or any
-        // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
-        // yet and stuff might break.
-        [STAThread]
+        public static IConfiguration Configuration { get; private set; }
+
         public static void Main(string[] args)
         {
-            var configuration = new ConfigurationBuilder()
+            // Ensure that Configuration is set correctly
+            Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            string apiKey = configuration["TMDb:ApiKey"];
-
-            BuildAvaloniaApp()
-                .StartWithClassicDesktopLifetime(args);
+            // Now use the configuration
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
 
         // Avalonia configuration, don't remove; also used by visual designer.

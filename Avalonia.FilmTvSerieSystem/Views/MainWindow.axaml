@@ -15,5 +15,14 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Left" Width="200" Background="Gray" Spacing="10">
+			<Button Content="Home" Command="{Binding NavigateCommand}" CommandParameter="Home"/>
+			<Button Content="Watchlist" Command="{Binding NavigateCommand}" CommandParameter="Watchlist"/>
+			<Button Content="Search" Command="{Binding NavigateCommand}" CommandParameter="Search"/>
+			<Button Content="Ratings and Reviews" Command="{Binding NavigateCommand}" CommandParameter="Ratings"/>
+		</StackPanel>
+		
+		<ContentControl Content="{Binding CurrentView}"/>
+	</DockPanel>
 </Window>

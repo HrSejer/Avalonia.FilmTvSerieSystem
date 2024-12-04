@@ -1,7 +1,33 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Avalonia.FilmTvSerieSystem.MovieView">
+             xmlns:vm="using:Avalonia.FilmTvSerieSystem.ViewModels"
+             xmlns:converters="using:Avalonia.FilmTvSerieSystem.Converters"
+             xmlns:m="using:Avalonia.FilmTvSerieSystem.Models"
+             x:Class="Avalonia.FilmTvSerieSystem.Views.MovieView"
+			 x:DataType="vm:MovieViewModel">
+
+	<UserControl.Resources>
+		<converters:BooleanToIsVisibleConverter x:Key="BooleanToIsVisibleConverter" />
+		<converters:ImageUrlToBitmapConverter x:Key="ImageUrlToBitmapConverter" />
+	</UserControl.Resources>
+
+	<StackPanel>
+		<TextBlock Text="Popular Movies" FontSize="24" Margin="10" />
+
+		<TextBlock Text="Loading..." HorizontalAlignment="Center" VerticalAlignment="Center"
+				   IsVisible="{Binding Loading, Converter={StaticResource BooleanToIsVisibleConverter}}" />
+
+		<ScrollViewer VerticalScrollBarVisibility="Visible" Height="1000">
+			<ListBox ItemsSource="{Binding PopularMovies}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Button Command="{Binding DataContext.ShowMovieDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+								CommandParameter="{Binding}">
+							<TextBlock Text="{Binding Title}" />
+						</Button>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</ScrollViewer>
+	</StackPanel>
 </UserControl>

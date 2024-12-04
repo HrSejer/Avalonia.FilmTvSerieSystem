@@ -4,23 +4,27 @@ using Avalonia.FilmTvSerieSystem.ViewModels;
 using Avalonia.Markup.Xaml;
 using System.Threading.Tasks;
 
-namespace Avalonia.FilmTvSerieSystem;
-
-public partial class MovieView : UserControl
+namespace Avalonia.FilmTvSerieSystem.Views
 {
-    private readonly MovieViewModel _movieViewModel;
-    public MovieView()
+    public partial class MovieView : UserControl
     {
-        InitializeComponent();
-    }
+        private readonly MovieViewModel _movieViewModel;
 
-    public MovieView(MovieViewModel movieViewModel)
-    {
-        _movieViewModel = movieViewModel;
-    }
+        // Constructor that receives the TMDbService instance
+        public MovieView(TMDbService tmdbService)
+        {
+            InitializeComponent();
+            _movieViewModel = new MovieViewModel(tmdbService);  // Pass the service to ViewModel
+            DataContext = _movieViewModel;  // Set DataContext
+        }
 
-    public async Task LoadMovie(int movieId)
-    {
-        var movie = await _movieViewModel.GetMovieDetails(movieId);
+        // Constructor that receives the ViewModel directly
+        public MovieView(MovieViewModel movieViewModel)
+        {
+            InitializeComponent();
+            DataContext = movieViewModel;  // Set DataContext
+        }
     }
 }
+
+
