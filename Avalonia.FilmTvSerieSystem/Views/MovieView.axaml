@@ -4,30 +4,37 @@
              xmlns:converters="using:Avalonia.FilmTvSerieSystem.Converters"
              xmlns:m="using:Avalonia.FilmTvSerieSystem.Models"
              x:Class="Avalonia.FilmTvSerieSystem.Views.MovieView"
-			 x:DataType="vm:MovieViewModel">
+             x:DataType="vm:MovieViewModel">
 
-	<UserControl.Resources>
-		<converters:BooleanToIsVisibleConverter x:Key="BooleanToIsVisibleConverter" />
-		<converters:ImageUrlToBitmapConverter x:Key="ImageUrlToBitmapConverter" />
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <converters:BooleanToIsVisibleConverter x:Key="BooleanToIsVisibleConverter" />
+        <converters:ImageUrlToBitmapConverter x:Key="ImageUrlToBitmapConverter" />
+    </UserControl.Resources>
 
-	<StackPanel>
-		<TextBlock Text="Popular Movies" FontSize="24" Margin="10" />
+    <StackPanel>
+        <!-- Header -->
+        <TextBlock Text="Popular Movies" FontSize="24" Margin="10" />
 
-		<TextBlock Text="Loading..." HorizontalAlignment="Center" VerticalAlignment="Center"
-				   IsVisible="{Binding Loading, Converter={StaticResource BooleanToIsVisibleConverter}}" />
+        <!-- Loading Indicator -->
+        <TextBlock Text="Loading..." 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   IsVisible="{Binding Loading, Converter={StaticResource BooleanToIsVisibleConverter}}" />
 
-		<ScrollViewer VerticalScrollBarVisibility="Visible" Height="1000">
-			<ListBox ItemsSource="{Binding PopularMovies}">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Button Command="{Binding DataContext.ShowMovieDetailsCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
-								CommandParameter="{Binding}">
-							<TextBlock Text="{Binding Title}" />
+        <!-- Movies List -->
+        <ScrollViewer VerticalScrollBarVisibility="Visible" Height="600">
+            <ListBox ItemsSource="{Binding PopularMovies, Mode=OneWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+						<Button>
+							<StackPanel>
+								<Image Source="{Binding PosterPath, Converter={StaticResource ImageUrlToBitmapConverter}}"
+									   Width="200" Height="300"/>
+								<TextBlock Text="{Binding Title}" HorizontalAlignment="Center" Margin="5" />
+							</StackPanel>
 						</Button>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
-		</ScrollViewer>
-	</StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </StackPanel>
 </UserControl>

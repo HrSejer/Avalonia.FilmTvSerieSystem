@@ -13,6 +13,7 @@ namespace Avalonia.FilmTvSerieSystem.ViewModels
     {
         private object _currentView;
         private readonly TMDbService _tmdbService;
+        private readonly MainWindowViewModel _mainWindowViewModel;
 
         public object CurrentView
         {
@@ -88,6 +89,12 @@ namespace Avalonia.FilmTvSerieSystem.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public void NavigateToDetails(TMDbLib.Objects.Movies.Movie selectedMovie)
+        {
+            CurrentView = new MovieDetailsView
+            {
+                DataContext = new MovieDetailsViewModel(selectedMovie)
+            };
+        }
     }
-
 }

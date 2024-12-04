@@ -2,12 +2,13 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Avalonia.FilmTvSerieSystem.Views;
-
-public partial class MovieDetailsView : Window
+namespace Avalonia.FilmTvSerieSystem.Views
 {
-    public MovieDetailsView()
+    public partial class MovieDetailsView : UserControl
     {
-        InitializeComponent();
+        public MovieDetailsView()
+        {
+            InitializeComponent();
+        }
     }
 }

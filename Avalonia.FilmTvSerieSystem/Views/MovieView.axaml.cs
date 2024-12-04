@@ -9,6 +9,7 @@ namespace Avalonia.FilmTvSerieSystem.Views
     public partial class MovieView : UserControl
     {
         private readonly MovieViewModel _movieViewModel;
+        private readonly MainWindowViewModel _mainWindowViewModel;
 
         // Constructor that receives the TMDbService instance
         public MovieView(TMDbService tmdbService)

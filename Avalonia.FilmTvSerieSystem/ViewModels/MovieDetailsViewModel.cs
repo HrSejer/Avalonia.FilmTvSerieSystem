@@ -16,9 +16,9 @@ namespace Avalonia.FilmTvSerieSystem.ViewModels
         public string Overview => SelectedMovie.Overview;
         public string PosterPath => SelectedMovie.PosterPath;
 
-        public MovieDetailsViewModel(TMDbLib.Objects.Movies.Movie selectedMovie)
+        public MovieDetailsViewModel(TMDbLib.Objects.Movies.Movie movie)
         {
-            SelectedMovie = selectedMovie;
+            SelectedMovie = movie;
         }
     }
 }

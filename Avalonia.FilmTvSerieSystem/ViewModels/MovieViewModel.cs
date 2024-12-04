@@ -20,10 +20,18 @@ namespace Avalonia.FilmTvSerieSystem.ViewModels
 {
     public class MovieViewModel : ObservableObject
     {
+        private readonly MainWindowViewModel _mainWindowViewModel;
+
         private readonly TMDbService _tmdbService;
         public ObservableCollection<TMDbLib.Objects.Movies.Movie> PopularMovies { get; }
         public ICommand ShowMovieDetailsCommand { get; }
         public event Action<TMDbLib.Objects.Movies.Movie>? MovieSelected;
+        private TMDbLib.Objects.Movies.Movie? _selectedMovie;
+        public TMDbLib.Objects.Movies.Movie? SelectedMovie
+        {
+            get => _selectedMovie;
+            set => SetProperty(ref _selectedMovie, value);
+        }
 
         private bool _loading;
         public bool Loading
@@ -72,9 +80,12 @@ namespace Avalonia.FilmTvSerieSystem.ViewModels
                 Loading = false;
             }
         }
-        private void ShowMovieDetails(TMDbLib.Objects.Movies.Movie movie)
+        private void ShowMovieDetails(TMDbLib.Objects.Movies.Movie selectedMovie)
         {
-            MovieSelected?.Invoke(movie);
+            if (selectedMovie != null)
+            {
+                _mainWindowViewModel.NavigateToDetails(selectedMovie);
+            }
         }
     }
 }
